@@ -1,18 +1,8 @@
 // import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import {
-  Button,
-  TextField,
-  Stack,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  Checkbox,
-  ListItemText,
-} from '@mui/material';
-import { MuiList } from './component/List';
+import { Button, Stack } from '@mui/material';
+import { List } from './component/List';
 import { ChangeEventHandler, useCallback, useState } from 'react';
 import { InputField } from './component/InputField';
 export type TodoItem = { id: number; value: string };
@@ -51,7 +41,7 @@ function App() {
           追加
         </Button>
       </Stack>
-      <MuiList todoItems={todos} />
+      <List todoItems={todos} />
     </div>
   );
 }

@@ -1,14 +1,14 @@
 // @flow
 import * as React from 'react';
-import { Checkbox, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Checkbox, List as MuiList, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { TodoItem } from '../../App';
 
 type Props = {
   todoItems: Array<TodoItem>;
 };
-export const MuiList = ({ todoItems }: Props) => {
+export const List = ({ todoItems }: Props) => {
   return (
-    <List>
+    <MuiList>
       {todoItems.map((todoItem) => {
         return (
           <ListItem key={todoItem.id}>
@@ -21,6 +21,6 @@ export const MuiList = ({ todoItems }: Props) => {
           </ListItem>
         );
       })}
-    </List>
+    </MuiList>
   );
 };
