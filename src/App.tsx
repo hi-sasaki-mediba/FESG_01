@@ -35,7 +35,7 @@ function App() {
   const [newTodoContents, setNewTodoContents] = useState<string>('');
 
   const addTodo = useCallback(() => {
-    const newTodoItem = { id: todos.length + 1, value: newTodoContents };
+    const newTodoItem = { id: todos.length + 1, value: newTodoContents }; //idの振り方改善
     setTodos((currTodoList) => currTodoList.concat([newTodoItem]));
   }, [todos, newTodoContents]);
 
