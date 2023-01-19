@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { Checkbox, List as MuiList, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { TodoItem } from '../../App';

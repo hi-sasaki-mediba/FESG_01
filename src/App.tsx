@@ -1,5 +1,3 @@
-// import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import { Button, Stack } from '@mui/material';
 import { List } from './component/List';

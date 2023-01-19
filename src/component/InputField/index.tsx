@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { TextField } from '@mui/material';
 import { ChangeEventHandler } from 'react';
