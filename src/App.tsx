@@ -1,7 +1,7 @@
 import './App.css';
 import { Button, Stack } from '@mui/material';
 import { List } from './component/List';
-import { ChangeEventHandler, useCallback, useState } from 'react';
+import { ChangeEventHandler, useCallback } from 'react';
 import { InputField } from './component/InputField';
 import { useDispatch, useSelector } from 'react-redux';
 import { insertTodo, onChangeInputField } from './slice/todoSlice';
@@ -17,7 +17,6 @@ function App() {
   const onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = useCallback((event) => {
     dispatch(onChangeInputField(event.currentTarget.value));
   }, []);
-  console.log(todoItems);
   return (
     <div className="App">
       <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>

@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TodoItem } from '../App';
 
 interface InitialState {
@@ -22,13 +22,17 @@ const todoSlice = createSlice({
     // },
     insertTodo(state) {
       state.todoItems = [...state.todoItems, { id: state.id, value: state.inputFieldValue }];
+      state.inputFieldValue = '';
       state.id++;
     },
-    onChangeInputField(state, inputValue: PayloadAction<string>) {
-      state.inputFieldValue = inputValue.payload
+    onChangeInputField(state, { payload: inputValue }: PayloadAction<string>) {
+      state.inputFieldValue = inputValue;
+    },
+    removeTodo(state, { payload: todoId }: PayloadAction<number>) {
+      state.todoItems = state.todoItems.filter((item) => item.id !== todoId);
     },
   },
 });
 
-export const { insertTodo,onChangeInputField } = todoSlice.actions;
+export const { insertTodo, onChangeInputField, removeTodo } = todoSlice.actions;
 export default todoSlice.reducer;
