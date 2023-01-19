@@ -37,6 +37,7 @@ function App() {
   const addTodo = useCallback(() => {
     const newTodoItem = { id: todos.length + 1, value: newTodoContents }; //idの振り方改善
     setTodos((currTodoList) => currTodoList.concat([newTodoItem]));
+    setNewTodoContents('');
   }, [todos, newTodoContents]);
 
   const onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = useCallback((event) => {
@@ -45,7 +46,7 @@ function App() {
   return (
     <div className="App">
       <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-        <InputField onChange={onChange} />
+        <InputField onChange={onChange} inputValue={newTodoContents} />
         <Button onClick={addTodo} variant="contained">
           追加
         </Button>
