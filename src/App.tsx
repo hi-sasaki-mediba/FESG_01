@@ -1,47 +1,45 @@
-// import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
-import {Button, TextField, Stack, List, ListItem, ListItemButton, ListItemIcon, Checkbox, ListItemText} from '@mui/material';
-
+import { Button, Stack } from '@mui/material';
+import { List } from './component/List';
+import { ChangeEventHandler, useCallback, useState } from 'react';
+import { InputField } from './component/InputField';
+export type TodoItem = { id: number; value: string };
 function App() {
   const todoItems = [
     {
       id: 1,
-      value: 'todo1'
+      value: 'todo1',
     },
     {
       id: 2,
-      value: 'todo2'
+      value: 'todo2',
     },
     {
       id: 3,
-      value: 'todo3'
-    }
+      value: 'todo3',
+    },
   ];
+  const [todos, setTodos] = useState<Array<TodoItem>>(todoItems);
+  const [newTodoContents, setNewTodoContents] = useState<string>('');
+
+  const addTodo = useCallback(() => {
+    const newTodoItem = { id: todos.length + 1, value: newTodoContents }; //idの振り方改善
+    setTodos((currTodoList) => currTodoList.concat([newTodoItem]));
+    setNewTodoContents('');
+  }, [todos, newTodoContents]);
+
+  const onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = useCallback((event) => {
+    setNewTodoContents(event.currentTarget.value);
+  }, []);
   return (
     <div className="App">
       <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-        <TextField id="standard-basic" label="タスクを追加" variant="outlined" />
-        <Button variant="contained">追加</Button>
+        <InputField onChange={onChange} inputValue={newTodoContents} />
+        <Button onClick={addTodo} variant="contained">
+          追加
+        </Button>
       </Stack>
-      <List>
-        {todoItems.map((todoItem) => {
-          return (
-            <ListItem key={todoItem.id}>
-              <ListItemButton role={undefined} dense disableRipple>
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    tabIndex={-1}
-                    disableRipple
-                  />
-                </ListItemIcon>
-                <ListItemText primary={todoItem.value} />
-              </ListItemButton>
-            </ListItem>
-          )
-        })}
-      </List>
+      <List todoItems={todos} />
     </div>
   );
 }
