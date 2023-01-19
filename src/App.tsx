@@ -1,45 +1,31 @@
 import './App.css';
 import { Button, Stack } from '@mui/material';
 import { List } from './component/List';
-import { ChangeEventHandler, useCallback, useState } from 'react';
+import { ChangeEventHandler, useCallback } from 'react';
 import { InputField } from './component/InputField';
+import { useDispatch, useSelector } from 'react-redux';
+import { insertTodo, onChangeInputField } from './slice/todoSlice';
+import { RootState } from './store/store';
 export type TodoItem = { id: number; value: string };
 function App() {
-  const todoItems = [
-    {
-      id: 1,
-      value: 'todo1',
-    },
-    {
-      id: 2,
-      value: 'todo2',
-    },
-    {
-      id: 3,
-      value: 'todo3',
-    },
-  ];
-  const [todos, setTodos] = useState<Array<TodoItem>>(todoItems);
-  const [newTodoContents, setNewTodoContents] = useState<string>('');
-
+  const { inputFieldValue, todoItems } = useSelector((state: RootState) => state.todo);
+  const dispatch = useDispatch();
   const addTodo = useCallback(() => {
-    const newTodoItem = { id: todos.length + 1, value: newTodoContents }; //idの振り方改善
-    setTodos((currTodoList) => currTodoList.concat([newTodoItem]));
-    setNewTodoContents('');
-  }, [todos, newTodoContents]);
+    dispatch(insertTodo());
+  }, []);
 
   const onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = useCallback((event) => {
-    setNewTodoContents(event.currentTarget.value);
+    dispatch(onChangeInputField(event.currentTarget.value));
   }, []);
   return (
     <div className="App">
       <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-        <InputField onChange={onChange} inputValue={newTodoContents} />
+        <InputField onChange={onChange} inputValue={inputFieldValue} />
         <Button onClick={addTodo} variant="contained">
           追加
         </Button>
       </Stack>
-      <List todoItems={todos} />
+      <List todoItems={todoItems} />
     </div>
   );
 }
