@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { TodoItem } from "../App";
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { TodoItem } from '../App';
 
 interface InitialState {
   todoItems: Array<TodoItem>;
@@ -21,11 +21,14 @@ const todoSlice = createSlice({
     //   state.todoItems = [...state.todoItems, action.payload];
     // },
     insertTodo(state) {
-      state.todoItems = [...state.todoItems, {id: state.id, value: state.inputFieldValue}];
+      state.todoItems = [...state.todoItems, { id: state.id, value: state.inputFieldValue }];
       state.id++;
     },
-  }
-})
+    onChangeInputField(state, inputValue: PayloadAction<string>) {
+      state.inputFieldValue = inputValue.payload
+    },
+  },
+});
 
-export const { insertTodo } = todoSlice.actions;
+export const { insertTodo,onChangeInputField } = todoSlice.actions;
 export default todoSlice.reducer;
