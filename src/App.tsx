@@ -17,6 +17,7 @@ function App() {
   const onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = useCallback((event) => {
     dispatch(onChangeInputField(event.currentTarget.value));
   }, []);
+
   return (
     <div className="App">
       <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>

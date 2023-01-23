@@ -11,11 +11,43 @@ import '@fontsource/roboto/700.css';
 import { Provider } from 'react-redux';
 import store from './store/store';
 
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
+
+function Bomb() {
+  throw new Error('💥 CABOOM 💥');
+  return <></>;
+}
+
+function Hoge() {
+  const [explode, setExplode] = React.useState(false);
+  return (
+    <div>
+      <button onClick={() => setExplode((e) => !e)}>toggle explode</button>
+      <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => setExplode(false)} resetKeys={[explode]}>
+        {explode ? <Bomb /> : null}
+      </ErrorBoundary>
+    </div>
+  );
+}
+
+function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
+  return (
+    <div role="alert">
+      <p>Something went wrong:</p>
+      <pre>{error.message}</pre>
+      <button onClick={resetErrorBoundary}>Try again</button>
+    </div>
+  );
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      {/* <ErrorBoundary FallbackComponent={ErrorFallback}> */}
       <App />
+      <Hoge />
+      {/* </ErrorBoundary> */}
     </Provider>
   </React.StrictMode>
 );
