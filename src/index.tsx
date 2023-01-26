@@ -13,6 +13,8 @@ import store from './store/store';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { NotFound } from './features/error/NotFound';
+import { ThemeProvider } from '@mui/system';
+import { createTheme } from '@mui/material';
 
 const router = createBrowserRouter([
   {
@@ -22,11 +24,19 @@ const router = createBrowserRouter([
   },
 ]);
 
+const theme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>
 );
