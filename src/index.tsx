@@ -11,11 +11,22 @@ import '@fontsource/roboto/700.css';
 import { Provider } from 'react-redux';
 import store from './store/store';
 
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { NotFound } from './features/error/NotFound';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    errorElement: <NotFound />,
+  },
+]);
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 );
