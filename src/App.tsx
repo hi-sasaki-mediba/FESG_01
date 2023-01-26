@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { insertTodo, onChangeInputField } from './slice/todoSlice';
 import { RootState } from './store/store';
 import { useForm } from 'react-hook-form';
+import { ChangeTheme } from './component/changeTheme';
 
 export type TodoItem = { id: number; value: string };
 
@@ -36,7 +37,7 @@ function App() {
 
   return (
     <Box bgcolor={theme.palette.background.default} sx={{ height: '100vh', padding: '12px' }}>
-      {/* <Box> */}
+      <ChangeTheme />
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
           <TextField
