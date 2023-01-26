@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Button, Checkbox, ListItem as MuiListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import {
+  Button,
+  Checkbox,
+  ListItem as MuiListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  useTheme,
+} from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 import { removeTodo } from '../../../slice/todoSlice';
@@ -7,6 +15,7 @@ import { TodoItem } from '../../../App';
 
 const ListItem = ({ todoItem }: { todoItem: TodoItem }) => {
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const onRemoveTodo = useCallback(() => {
     dispatch(removeTodo(todoItem.id));
@@ -25,7 +34,7 @@ const ListItem = ({ todoItem }: { todoItem: TodoItem }) => {
         <ListItemIcon>
           <Checkbox edge="start" tabIndex={-1} disableRipple />
         </ListItemIcon>
-        <ListItemText primary={todoItem.value} />
+        <ListItemText primary={todoItem.value} sx={{ color: theme.palette.text.primary }} />
       </ListItemButton>
     </MuiListItem>
   );
