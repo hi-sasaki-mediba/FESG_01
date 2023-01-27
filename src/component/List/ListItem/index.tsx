@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Button, Checkbox, ListItem as MuiListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import {
+  Button,
+  Checkbox,
+  ListItem as MuiListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  useTheme,
+} from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 import { removeTodo } from '../../../slice/todoSlice';
