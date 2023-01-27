@@ -17,7 +17,6 @@ function App() {
   const addTodo = useCallback(() => {
     dispatch(insertTodo());
   }, [dispatch]);
-  const theme = useTheme();
 
   const onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = useCallback(
     (event) => {
