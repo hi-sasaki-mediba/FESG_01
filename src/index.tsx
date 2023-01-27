@@ -14,7 +14,7 @@ import store, { RootState } from './store/store';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { NotFound } from './features/error/NotFound';
 import { ThemeProvider } from '@mui/system';
-import { createTheme } from '@mui/material';
+import { createTheme, CssBaseline } from '@mui/material';
 import { ChangeTheme } from './component/changeTheme';
 
 const router = createBrowserRouter([
@@ -45,7 +45,10 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <WrappedThemeProvider>
-        <RouterProvider router={router} />
+        <>
+          <RouterProvider router={router} />
+          <CssBaseline />
+        </>
       </WrappedThemeProvider>
     </Provider>
   </React.StrictMode>

@@ -15,7 +15,6 @@ import { TodoItem } from '../../../App';
 
 const ListItem = ({ todoItem }: { todoItem: TodoItem }) => {
   const dispatch = useDispatch();
-  const theme = useTheme();
 
   const onRemoveTodo = useCallback(() => {
     dispatch(removeTodo(todoItem.id));
@@ -34,7 +33,7 @@ const ListItem = ({ todoItem }: { todoItem: TodoItem }) => {
         <ListItemIcon>
           <Checkbox edge="start" tabIndex={-1} disableRipple />
         </ListItemIcon>
-        <ListItemText primary={todoItem.value} sx={{ color: theme.palette.text.primary }} />
+        <ListItemText primary={todoItem.value} />
       </ListItemButton>
     </MuiListItem>
   );
